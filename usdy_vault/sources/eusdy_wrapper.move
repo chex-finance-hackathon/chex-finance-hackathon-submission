@@ -41,6 +41,14 @@ module usdy_vault::eusdy_wrapper {
         move_to(&resource_account_signer, Capabilities { burn_capability, freeze_capability, mint_capability });
     }
 
+    public entry fun mint_for_testnet(user: &signer, amount: u64) acquires Capabilities {
+        let caps = borrow_global_mut<Capabilities>(package::package_address());
+
+        let eusdy_coin = coin::mint<EUSDY>(amount, &caps.mint_capability);
+
+        coin::deposit<EUSDY>(signer::address_of(user), eusdy_coin);
+    }
+
 
     public fun mint_eusdy(usdy_coin: Coin<USDY>): Coin<EUSDY> acquires Capabilities {
         let caps = borrow_global_mut<Capabilities>(package::package_address());

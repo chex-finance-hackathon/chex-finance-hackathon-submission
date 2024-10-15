@@ -32,7 +32,11 @@ module usdy_vault::vault_scripts {
     const ERR_USDY_VAULT_UNINITIALIZED: u64 = 1;
     const ERR_INSUFFICIENT_INPUT: u64 = 2;
 
-    public fun deposit_usdy(user: &signer, usdy_coin: Coin<USDY>, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>) acquires SmartSigner {
+    public entry fun deposit_usdy_entry(user: &signer, usdy_coin_amount: u64, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>) {
+        deposit_usdy(user, coin::withdraw<USDY>(user, usdy_coin_amount), mod_market_obj, thala_vault_hint)
+    }
+
+    public fun deposit_usdy(user: &signer, usdy_coin: Coin<USDY>, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>) {
         assert!(coin::value(&usdy_coin) > 0, ERR_INSUFFICIENT_INPUT);
         let eusdy_coin = eusdy_wrapper::mint_eusdy(usdy_coin);
 
@@ -58,9 +62,15 @@ module usdy_vault::vault_scripts {
         lending::supply<MOD>(smart_signer, mod_market_obj, mod_coin);
     }
 
+    public entry fun withdraw_usdy_entry(user: &signer, amount_usdy: u64, extra_mod_coin_amount: u64, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>) { 
+        let (usdy, mod) = withdraw_usdy(user, amount_usdy, coin::withdraw<MOD>(user, extra_mod_coin_amount), mod_market_obj, thala_vault_hint);
+        coin::deposit<USDY>(signer::address_of(user), usdy);
+        coin::deposit<MOD>(signer::address_of(user), mod);
+    }
+
     // extra_mod_coin is used to cover any outstanding liability in the CDP, letting users withdraw
     // all USDY from their position even if CDP ir % > lending apy %
-    public fun withdraw_usdy(user: &signer, amount_usdy: u64, extra_mod_coin: Coin<MOD>, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>): (Coin<USDY>, Coin<MOD>) acquires SmartSigner {
+    public fun withdraw_usdy(user: &signer, amount_usdy: u64, extra_mod_coin: Coin<MOD>, mod_market_obj: Object<Market>, thala_vault_hint: Option<address>): (Coin<USDY>, Coin<MOD>) {
         assert!(smart_signer_exists(signer::address_of(user)), ERR_USDY_VAULT_UNINITIALIZED);
         assert!(amount_usdy > 0, ERR_INSUFFICIENT_INPUT);
 

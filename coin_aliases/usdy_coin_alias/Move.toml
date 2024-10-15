@@ -8,4 +8,4 @@ subdir = "aptos-move/framework/aptos-framework"
 rev = "mainnet"
 
 [addresses]
-usdy_alias = "0x84d7aeef42d38a5ffc3ccef853e1b82e4958659d16a7de736a29c55fbbeb0114"
+usdy_alias = "0xb129c938e4d1a0c2ae6be6c4589dfcfaba6f87be41c6ef65a1b2f10fa36366ac"

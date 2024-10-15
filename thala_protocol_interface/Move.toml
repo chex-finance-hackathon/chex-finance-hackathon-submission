@@ -3,7 +3,7 @@ name = 'ThalaProtocol'
 version = "1.0.0"
 
 [addresses]
-thala_protocol_interface = "092e95ed77b5ac815d3fbc2227e76db238339e9ca43ace45031ec2589bea5b8c"
+thala_protocol_interface = "8e487076b02494ac4a6551c22b22e247de08bb434ff956d424bd3fb3b0eb3b6d"
 
 [dependencies.AptosFramework]
 git = 'https://github.com/aptos-labs/aptos-core.git'
@@ -12,4 +12,4 @@ subdir = 'aptos-move/framework/aptos-framework'
 
 [dependencies.FixedPoint64]
 git = "https://github.com/ThalaLabs/fixed_point64.git"
-rev = "main"
+rev = "testnet"
