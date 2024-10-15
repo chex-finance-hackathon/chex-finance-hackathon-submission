@@ -1,0 +1,28 @@
+[package]
+name = "USDYTreasuryVault"
+version = "1.0.0"
+authors = []
+
+[addresses]
+usdy_vault = "a531bb7f4edaf3f414161b81edad793793619b19222d33a2f993e976f0aa22b5"
+usdy_vault_deployer = "0x11e7cb3888628fa1ddf21b95e39d2e8104a60293b15536568d8a356b4cb2aeb2"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dependencies.FixedPoint64]
+git = "https://github.com/ThalaLabs/fixed_point64.git"
+rev = "main"
+
+[dependencies.ThalaProtocol]
+local = "../thala_protocol_interface"
+
+[dependencies.USDYCoin]
+local = "../coin_aliases/usdy_coin_alias"
+
+[dependencies.Lending]
+git = "https://github.com/EchelonMarket/echelon-modules.git"
+subdir = "lending_core"
+rev = "feat.usdy-vault"
