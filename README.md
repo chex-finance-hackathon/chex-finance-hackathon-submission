@@ -12,5 +12,6 @@ In the repository, you’ll find:
 With these components, Chex enables seamless, scalable, and secure integration of RWAs into DeFi, driving greater liquidity and composability across Aptos.
 
 Testnet Demo Video:
-https://github.com/user-attachments/assets/21642ac4-9c19-4720-8eea-55165aaccedb
+
+https://github.com/user-attachments/assets/d18bfeb9-72da-46ab-a441-8ec0a2749713
 
