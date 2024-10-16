@@ -1,5 +1,5 @@
 /// A mock mod coin implementation for tests. Non-test-only interfaces are consistent with the real thala oracle.
-/// This package will not be deployed
+/// This version of the package will not be deployed in production
 module thala_protocol_interface::mod_coin {
     use std::string;
     use std::signer;
